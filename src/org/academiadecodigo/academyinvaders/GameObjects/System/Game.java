@@ -29,9 +29,10 @@ public class Game {
         GAME_GRID.init();
 
         enemy = new Baljeet(GAME_GRID.makeGridPosition(500,50));
+
         enemy.setGrid(GAME_GRID);
 
-        player = new Player(player.getPlayerPosition());
+        player = new Player(GAME_GRID.makeGridPosition(500, 500));
     }
 
     public void start() {

@@ -1,17 +1,24 @@
-package GameObjects.Enemy;
+package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
+
 
 public abstract class Enemy {
 
     private GridPosition enemyPosition;
+
     private Grid grid;
-    private GameObjects.Enemy.EnemyType enemyType;
+
+    private EnemyType enemyType;
+
     private boolean destroyed;
 
     private final int health;
 
     protected DestructionDetector destructionDetector;
+
 
     public Enemy(GridPosition enemyPosition
 //                 GameObjects.Enemy.EnemyType enemyType

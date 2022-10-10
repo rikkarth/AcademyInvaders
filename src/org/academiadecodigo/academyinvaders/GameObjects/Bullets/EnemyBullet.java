@@ -1,8 +1,12 @@
-package GameObjects.Bullets;
+package org.academiadecodigo.academyinvaders.GameObjects.Bullets;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.Bullets;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
 
 public class EnemyBullet extends Bullets {
+
+    private GridPosition bulletPosition;
 
     public EnemyBullet(GridPosition bulletPosition) {
         super(bulletPosition);
@@ -10,7 +14,7 @@ public class EnemyBullet extends Bullets {
 
     @Override
     public void bulletMovement() {
-        move.DOWN;
+        bulletPosition.moveInDirection(GridDirection.DOWN, 1);
     }
 
     @Override

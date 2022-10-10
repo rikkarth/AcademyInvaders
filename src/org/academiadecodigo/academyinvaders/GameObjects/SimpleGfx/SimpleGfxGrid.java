@@ -52,7 +52,7 @@ public class SimpleGfxGrid implements Grid {
      *
      * @return the x position of the grid
      */
-    public int gridGetX(){
+    public int getGridX(){
         return grid.getX();
     }
 
@@ -61,7 +61,7 @@ public class SimpleGfxGrid implements Grid {
      *
      * @return the y position of the grid
      */
-    public int gridGetY(){
+    public int getGridY(){
         return grid.getY();
     }
 

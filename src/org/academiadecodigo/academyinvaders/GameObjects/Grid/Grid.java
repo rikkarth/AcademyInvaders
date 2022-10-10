@@ -1,7 +1,6 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Grid;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public interface Grid {
 

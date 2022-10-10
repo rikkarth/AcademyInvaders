@@ -1,8 +1,9 @@
-package GameObjects.Enemy;
+package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
+
 
 public class EnemyFactory {
 
-    public void makeEnemy (GameObjects.Enemy.EnemyType enemyType) {
+    public void makeEnemy (EnemyType enemyType) {
 
     }
 }

@@ -1,14 +1,16 @@
-package GameObjects.Player;
+package org.academiadecodigo.academyinvaders.GameObjects.Player;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.*;
+import org.academiadecodigo.academyinvaders.GameObjects.Bullets.PlayerBullet;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
 
 public class Player {
 
     private GridPosition playerPosition;
     private Grid grid;
     private boolean destroyed;
-    private GameObjects.Bullets.PlayerBullet playerBullet;
+    private PlayerBullet playerBullet;
     private int health;
     private int livesLeft;
 

@@ -1,6 +1,5 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Bullets;
 
-
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
 
 public abstract class Bullets {

@@ -12,5 +12,6 @@ public class Main {
             Game newGame = new Game(5);
 
             newGame.init();
+            //newGame.start();
     }
 }

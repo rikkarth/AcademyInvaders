@@ -91,7 +91,7 @@ public abstract class AbstractGridPosition implements GridPosition {
     }
 
     public void moveDown(int distance) {
-        int maxDownHeight = distance > getGrid().getHeight() - (getHeight() + 1) ? getGrid().getHeight() - (getHeight() + 1) : distance;
+        int maxDownHeight = distance > getGrid().getGRID_HEIGHT() - (getHeight() + 1) ? getGrid().getGRID_HEIGHT() - (getHeight() + 1) : distance;
         setPos(getWidth(), getHeight() + maxDownHeight);
     }
 
@@ -102,7 +102,7 @@ public abstract class AbstractGridPosition implements GridPosition {
     }
 
     public void moveRight(int distance) {
-        int maxRightWidth = distance > getGrid().getWidth() - (getWidth() + 1) ? getGrid().getWidth() - (getWidth() + 1) : distance;
+        int maxRightWidth = distance > getGrid().getGRID_WIDTH() - (getWidth() + 1) ? getGrid().getGRID_WIDTH() - (getWidth() + 1) : distance;
         setPos(getWidth() + maxRightWidth, getWidth());
     }
 

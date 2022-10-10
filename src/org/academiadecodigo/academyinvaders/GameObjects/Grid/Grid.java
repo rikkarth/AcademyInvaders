@@ -12,17 +12,17 @@ public interface Grid {
     /**
      * width
      */
-    public int getWidth();
+    public int getGRID_WIDTH();
 
     /**
      * height
      */
-    public int getHeight();
+    public int getGRID_HEIGHT();
 
     /**
-     * the new grid position
+     * creates position in grid at width and height
      */
-    public GridPosition makeGridPosition(int width, int height);
+    public GridPosition makeGridPosition(int widthPos, int heightPos, int sizeX, int sizeY);
 
 
 }

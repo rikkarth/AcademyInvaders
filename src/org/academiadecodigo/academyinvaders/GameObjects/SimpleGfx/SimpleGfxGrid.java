@@ -11,40 +11,49 @@ public class SimpleGfxGrid implements Grid {
     Rectangle grid;
     private final int PADDING = 10;
 
-    private final int width;
+    private final int GRID_WIDTH;
 
-    private final int height;
+    private final int GRID_HEIGHT;
 
 
     //CONSTRUCTOR
+
+    /**
+     * When instanced, it will create a grid of the size width and height at provided padding
+     *
+     * @param width  size of the Game Grid
+     * @param height size of the Game Grid
+     */
     public SimpleGfxGrid(int width, int height) {
 
-        this.width = width;
-        this.height = height;
-        this.grid = new Rectangle(PADDING, PADDING, width, height);
+        this.GRID_WIDTH = width;
+        this.GRID_HEIGHT = height;
+        this.grid = new Rectangle(PADDING, PADDING, GRID_WIDTH, GRID_HEIGHT);
     }
 
     /**
-     * initializes grid
+     * Initializes/draws grid
      */
-
-    public void init(){
+    public void init() {
 
         grid.draw();
     }
 
     //GETTERS
-    public int getWidth() {
-        return this.width;
+    public int getGRID_WIDTH() {
+        return this.GRID_WIDTH;
     }
 
-    public int getHeight() {
-        return this.height;
+    public int getGRID_HEIGHT() {
+        return this.GRID_HEIGHT;
     }
 
+    /**
+     * @see Grid#makeGridPosition(int width, int height)
+     */
     @Override
-    public GridPosition makeGridPosition(int width, int height) {
-        return new SimpleGfxPosition(width, height, this);
+    public GridPosition makeGridPosition(int width, int height, int sizeX, int sizeY) {
+        return new SimpleGfxObjectPosition(width, height, sizeX, sizeY, this);
     }
 
     /**
@@ -52,7 +61,7 @@ public class SimpleGfxGrid implements Grid {
      *
      * @return the x position of the grid
      */
-    public int getGridX(){
+    public int getGridX() {
         return grid.getX();
     }
 
@@ -61,11 +70,8 @@ public class SimpleGfxGrid implements Grid {
      *
      * @return the y position of the grid
      */
-    public int getGridY(){
+    public int getGridY() {
         return grid.getY();
     }
-
-    //METHODS
-
 
 }

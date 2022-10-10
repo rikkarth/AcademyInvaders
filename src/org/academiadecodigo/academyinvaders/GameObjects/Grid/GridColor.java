@@ -1,4 +1,10 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Grid;
 
-public class GridColor {
+public enum GridColor {
+
+    RED,
+    GREEN,
+    BLUE,
+    MAGENTA,
+    NOCOLOR
 }

@@ -1,4 +1,9 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Grid;
 
-public class GridDirection {
+public enum GridDirection {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT;
+
 }

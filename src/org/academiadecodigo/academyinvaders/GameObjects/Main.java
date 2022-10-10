@@ -1,10 +1,13 @@
 package org.academiadecodigo.academyinvaders.GameObjects;
 
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridFactory;
+
 public class Main {
 
     public static void main(String[] args) {
 
 
-        System.out.println("Hello world!");
+        GridFactory.makeGrid(1024,768);
+
     }
 }

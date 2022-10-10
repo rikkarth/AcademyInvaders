@@ -1,4 +1,6 @@
 package GameObjects.Bullets;
 
-public class PlayerBullet {
+import org.academiadecodigo.academyinvaders.GameObjects.Bullets.Bullets;
+
+public class PlayerBullet extends Bullets {
 }

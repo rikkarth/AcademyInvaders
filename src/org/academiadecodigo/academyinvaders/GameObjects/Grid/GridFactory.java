@@ -1,10 +1,12 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Grid;
 
+import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxGrid;
+
 public class GridFactory {
 
-    public static void makeGrid(int width, int height) {
+    public static Grid makeGrid(int width, int height) {
 
-        new Grid(width, height);
+       return new SimpleGfxGrid(width, height);
     }
 }
 

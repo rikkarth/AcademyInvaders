@@ -9,14 +9,14 @@ public abstract class AbstractGridPosition implements GridPosition {
     //PROPERTIES
 
     private int width;
-    private int heigth;
+    private int height;
     private GridColor color;
     private Grid grid;
 
     public AbstractGridPosition(int width, int height, Grid grid) {
 
         this.width = width;
-        this.heigth = height;
+        this.height = height;
         this.grid = grid;
         this.color = GridColor.NOCOLOR;
     }
@@ -33,13 +33,13 @@ public abstract class AbstractGridPosition implements GridPosition {
 
     @Override
     public int getHeight() {
-        return this.heigth;
+        return this.height;
     }
 
     @Override
     public void setPos(int width, int height) {
         this.width = width;
-        this.heigth = height;
+        this.height = height;
         show();
     }
 
@@ -78,7 +78,7 @@ public abstract class AbstractGridPosition implements GridPosition {
     //Verificacao se a Gridposition#igual a Gridposition
     @Override
     public boolean equals(GridPosition position) {
-        return this.width == position.getWidth() && this.heigth == position.getHeight() ? true : false;
+        return this.width == position.getWidth() && this.height == position.getHeight() ? true : false;
     }
 
 // movimentos em gridposition para apoiar o switch movedirection;
@@ -87,7 +87,7 @@ public abstract class AbstractGridPosition implements GridPosition {
 
     public void moveUp(int distance) {
         int maxUpHeight = distance < getHeight() ? distance : getHeight();
-        setPos(getWidth(), this.heigth - maxUpHeight);
+        setPos(getWidth(), this.height - maxUpHeight);
     }
 
     public void moveDown(int distance) {

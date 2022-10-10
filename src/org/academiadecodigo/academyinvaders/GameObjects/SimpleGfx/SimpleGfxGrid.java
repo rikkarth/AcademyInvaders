@@ -1,6 +1,7 @@
 package org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class SimpleGfxGrid implements Grid {
@@ -41,6 +42,11 @@ public class SimpleGfxGrid implements Grid {
         return this.height;
     }
 
+    @Override
+    public GridPosition makeGridPosition(int width, int height) {
+        return new SimpleGfxPosition(width, height, this);
+    }
+
     /**
      * Obtains the grid X position in the SimpleGFX canvas
      *
@@ -56,7 +62,7 @@ public class SimpleGfxGrid implements Grid {
      * @return the y position of the grid
      */
     public int gridGetY(){
-        return grid.getY()
+        return grid.getY();
     }
 
     //METHODS

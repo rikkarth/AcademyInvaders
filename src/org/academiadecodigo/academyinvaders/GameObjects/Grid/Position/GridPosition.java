@@ -19,5 +19,8 @@ public interface GridPosition {
 
     public void moveInDirection(GridDirection direction, int distance);
 
+    /**
+     * Verifies if Grid Position is in same position than other Grid Position
+     */
     public boolean equals(GridPosition position);
 }

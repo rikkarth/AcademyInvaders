@@ -72,37 +72,45 @@ public abstract class AbstractGridPosition implements GridPosition {
                 moveRight(distance);
                 break;
         }
-
     }
 
-    //Verificacao se a Gridposition#igual a Gridposition
+    /**
+     * @see GridPosition
+     */
     @Override
     public boolean equals(GridPosition position) {
         return this.width == position.getWidth() && this.height == position.getHeight() ? true : false;
     }
 
-// movimentos em gridposition para apoiar o switch movedirection;
+    // movimentos em gridposition para apoiar o switch movedirection;
     // permite o movimento consoante a distancia até o maximo imposto pela Grid no Down and Right
-    //permite o movimento consoante a distancia até o maximo imposto pela relaçao do get da position no Up e Left
+    // permite o movimento consoante a distancia até o maximo imposto pela relaçao do get da position no Up e Left
 
     public void moveUp(int distance) {
+
         int maxUpHeight = distance < getHeight() ? distance : getHeight();
+
         setPos(getWidth(), this.height - maxUpHeight);
     }
 
     public void moveDown(int distance) {
+
         int maxDownHeight = distance > getGrid().getGRID_HEIGHT() - (getHeight() + 1) ? getGrid().getGRID_HEIGHT() - (getHeight() + 1) : distance;
+
         setPos(getWidth(), getHeight() + maxDownHeight);
     }
 
     public void moveLeft(int distance) {
-        int maxLeftWidth = distance < getWidth() ? distance : getWidth();
-        setPos(getWidth() - maxLeftWidth, getWidth());
 
+        int maxLeftWidth = distance < getWidth() ? distance : getWidth();
+
+        setPos(getWidth() - maxLeftWidth, getWidth());
     }
 
     public void moveRight(int distance) {
+
         int maxRightWidth = distance > getGrid().getGRID_WIDTH() - (getWidth() + 1) ? getGrid().getGRID_WIDTH() - (getWidth() + 1) : distance;
+
         setPos(getWidth() + maxRightWidth, getWidth());
     }
 

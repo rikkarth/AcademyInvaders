@@ -53,6 +53,7 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public GridPosition makeGridPosition(int width, int height, int sizeX, int sizeY) {
+
         return new SimpleGfxObjectPosition(width, height, sizeX, sizeY, this);
     }
 

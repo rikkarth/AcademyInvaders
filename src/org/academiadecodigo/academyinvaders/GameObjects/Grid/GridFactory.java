@@ -9,4 +9,3 @@ public class GridFactory {
        return new SimpleGfxGrid(width, height);
     }
 }
-

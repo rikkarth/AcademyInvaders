@@ -25,7 +25,6 @@ public abstract class AbstractGridPosition implements GridPosition {
         return grid;
     }
 
-
     @Override
     public int getWidth() {
         return this.width;
@@ -42,7 +41,6 @@ public abstract class AbstractGridPosition implements GridPosition {
         this.height = height;
         show();
     }
-
 
     @Override
     public GridColor getColor() {
@@ -113,5 +111,4 @@ public abstract class AbstractGridPosition implements GridPosition {
 
         setPos(getWidth() + maxRightWidth, getWidth());
     }
-
 }

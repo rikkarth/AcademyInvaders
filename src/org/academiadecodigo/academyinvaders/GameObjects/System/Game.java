@@ -26,7 +26,7 @@ public class Game {
     /**
      * Animation delay
      */
-    private final int DELAY;
+    public static int DELAY;
 
     /**
      * Constructs a new game
@@ -48,8 +48,11 @@ public class Game {
 
         enemy = new Baljeet(GAME_GRID.makeGridPosition(500, 50, 50, 50));
 
-        player = new Player(GAME_GRID.makeGridPosition(500, 500, 50, 50));
+        player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50));
+
+
     }
+
 
     /**
      * Starts the game
@@ -63,9 +66,13 @@ public class Game {
             // Pause for a while
             Thread.sleep(DELAY);
 
-            /**
+            /*
              * Insert Game Loop here
              */
+            enemy.move();
+
+
+
         }
     }
 }

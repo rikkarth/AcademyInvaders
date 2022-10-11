@@ -1,6 +1,7 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
 import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
 
@@ -40,6 +41,10 @@ public abstract class Enemy {
         return enemyPosition;
     }
 
+    public void setEnemyPosition(GridPosition enemyPosition) {
+        this.enemyPosition = enemyPosition;
+    }
+
     public void setDestructionDetector(DestructionDetector destructionDetector) {
         this.destructionDetector = destructionDetector;
     }
@@ -55,4 +60,10 @@ public abstract class Enemy {
     }
 
     abstract public void move();
+
+    public void movement(GridDirection direction, int distance) {
+
+        getEnemyPosition().moveInDirection(direction, distance);
+        System.out.println();
+    }
 }

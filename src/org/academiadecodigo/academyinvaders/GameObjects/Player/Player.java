@@ -16,13 +16,21 @@ public class Player implements KeyboardHandler {
     private GridPosition playerPosition;
 
     private Grid grid;
+
     private boolean destroyed;
+
     private PlayerBullet playerBullet;
+
     private int health;
+
     private int livesLeft;
 
     protected DestructionDetector destructionDetector;
 
+    /**
+     * Player Constructor
+     * @param playerPosition provides instance with position in grid
+     */
     public Player(GridPosition playerPosition) {
 
         this.playerPosition = playerPosition;
@@ -60,47 +68,54 @@ public class Player implements KeyboardHandler {
 
     }
 
+    /**
+     * Initializes keyboard
+     */
+    private void initKeyboard() {
 
+        Keyboard keyboard = new Keyboard(this);
 
+        KeyboardEvent rightPressed = new KeyboardEvent();
+        rightPressed.setKey(KeyboardEvent.KEY_D);
+        rightPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        private void initKeyboard() {
+        KeyboardEvent leftPressed = new KeyboardEvent();
+        leftPressed.setKey(KeyboardEvent.KEY_A);
+        leftPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-            Keyboard keyboard = new Keyboard(this);
+        KeyboardEvent shootPressed = new KeyboardEvent();
+        shootPressed.setKey(KeyboardEvent.KEY_SPACE);
+        shootPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-            KeyboardEvent rightPressed = new KeyboardEvent();
-            rightPressed.setKey(KeyboardEvent.KEY_D);
-            rightPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(leftPressed);
+        keyboard.addEventListener(rightPressed);
+        keyboard.addEventListener(shootPressed);
+    }
 
-            KeyboardEvent leftPressed = new KeyboardEvent();
-            leftPressed.setKey(KeyboardEvent.KEY_A);
-            leftPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+    /**
+     * Moves player left and right
+     */
+    @Override
+    public void keyPressed(KeyboardEvent keyboardEvent) {
 
-            KeyboardEvent shootPressed = new KeyboardEvent();
-            shootPressed.setKey(KeyboardEvent.KEY_SPACE);
-            shootPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
 
-            keyboard.addEventListener(leftPressed);
-            keyboard.addEventListener(rightPressed);
-            keyboard.addEventListener(shootPressed);
-
+            getPlayerPosition().moveInDirection(GridDirection.LEFT, 5);
         }
 
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
 
-
-        @Override
-        public void keyPressed(KeyboardEvent keyboardEvent) {
-            if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
-                getPlayerPosition().moveInDirection(GridDirection.LEFT,5);
-            }
-            if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
-                getPlayerPosition().moveInDirection(GridDirection.RIGHT,5);
-            }
-
-        }
-        @Override
-        public void keyReleased(KeyboardEvent keyboardEvent) {
-
+            getPlayerPosition().moveInDirection(GridDirection.RIGHT, 5);
         }
     }
+
+    /**
+     * Unused
+     */
+    @Override
+    public void keyReleased(KeyboardEvent keyboardEvent) {
+
+    }
+}
 
 

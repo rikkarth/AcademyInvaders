@@ -13,7 +13,7 @@ public class Baljeet extends Enemy {
 
     @Override
     public void move() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

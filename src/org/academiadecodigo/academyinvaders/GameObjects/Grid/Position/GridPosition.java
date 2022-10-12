@@ -17,6 +17,10 @@ public interface GridPosition {
 
     public void hide();
 
+    public int getObjectHeight();
+
+    public int getObjectWidth();
+
     public void moveInDirection(GridDirection direction, int distance);
 
     /**

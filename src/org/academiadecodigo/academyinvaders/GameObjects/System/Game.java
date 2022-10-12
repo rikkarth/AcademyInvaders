@@ -1,5 +1,6 @@
 package org.academiadecodigo.academyinvaders.GameObjects.System;
 
+import org.academiadecodigo.academyinvaders.GameObjects.Bullets.EnemyBullet;
 import org.academiadecodigo.academyinvaders.GameObjects.Enemy.*;
 import org.academiadecodigo.academyinvaders.GameObjects.Enemy.EnemyForm.*;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.*;
@@ -23,6 +24,8 @@ public class Game {
      */
     private Enemy enemy;
 
+    private EnemyBullet enemyBullet;
+
     /**
      * Animation delay
      */
@@ -36,6 +39,7 @@ public class Game {
     public Game(int delay) {
         GAME_GRID = GridFactory.makeGrid(1024, 768);
         this.DELAY = delay;
+
     }
 
     /**
@@ -46,9 +50,16 @@ public class Game {
 
         GAME_GRID.init();
 
+
         enemy = new Baljeet(GAME_GRID.makeGridPosition(500, 50, 50, 50));
 
         player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50));
+
+        enemyBullet = new EnemyBullet(GAME_GRID.makeGridPosition(525, 710, 10, 50));
+
+
+
+
 
 
     }
@@ -69,7 +80,13 @@ public class Game {
             /*
              * Insert Game Loop here
              */
-            enemy.move();
+            //enemy.move();
+            System.out.println(enemyBullet.collisionDetector(player));
+
+
+
+
+
 
 
 

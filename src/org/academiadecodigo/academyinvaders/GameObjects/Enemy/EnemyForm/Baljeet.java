@@ -15,14 +15,12 @@ public class Baljeet extends Enemy {
     public void move() {
         for (int i = 0; i < 100; i++) {
             try {
-                Thread.sleep(1);
+                Thread.sleep(10 );
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
-            movement(GridDirection.RIGHT, 1);
-
-
+            movement(GridDirection.DOWN, 1);
         }
 
 

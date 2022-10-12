@@ -13,6 +13,7 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
     /**
      * Simple graphics object position constructor
      * It will construct an object at given position
+     *
      * @param grid Simple graphics grid
      */
     public SimpleGfxObjectPosition(int width, int height, int sizeX, int sizeY, SimpleGfxGrid grid) {
@@ -28,30 +29,33 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
     }
 
 
-    public void moveInDirection(GridDirection direction, int distance){
-
-        System.out.println("distance " + distance);
-
-
+    public void moveInDirection(GridDirection direction, int distance) {
 
         int initialX = getWidth();
+
         int initialY = getHeight();
 
         super.moveInDirection(direction, distance);
 
         int movementX = getWidth() - initialX;
+
         int movementY = getHeight() - initialY;
-        System.out.println("X: "+movementX);
-        System.out.println("Y: "+movementY);
 
         object.translate(movementX, movementY);
-
-
-
     }
 
     public Rectangle getObject() {
         return object;
+    }
+
+    @Override
+    public int getObjectWidth() {
+       return object.getWidth();
+    }
+
+    @Override
+    public int getObjectHeight() {
+        return object.getHeight();
     }
 
     @Override

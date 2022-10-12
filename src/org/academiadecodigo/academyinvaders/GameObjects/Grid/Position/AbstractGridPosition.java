@@ -31,7 +31,7 @@ public abstract class AbstractGridPosition implements GridPosition {
     }
 
     @Override
-    public int  getHeight() {
+    public int getHeight() {
         return this.height;
     }
 
@@ -41,6 +41,7 @@ public abstract class AbstractGridPosition implements GridPosition {
         this.height = height;
         show();
     }
+
 
     @Override
     public GridColor getColor() {
@@ -85,7 +86,6 @@ public abstract class AbstractGridPosition implements GridPosition {
     // permite o movimento consoante a distancia até o maximo imposto pela relaçao do get da position no Up e Left
 
     public void moveUp(int distance) {
-
 
         int maxUpHeight = distance < getHeight() ? distance : getHeight();
 

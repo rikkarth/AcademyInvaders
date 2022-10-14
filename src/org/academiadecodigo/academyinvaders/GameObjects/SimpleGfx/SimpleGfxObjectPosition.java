@@ -24,8 +24,6 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
         object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
         show();
-
-
     }
 
 
@@ -56,6 +54,11 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
     @Override
     public int getObjectHeight() {
         return object.getHeight();
+    }
+
+    @Override
+    public int setHeight() {
+        return 0;
     }
 
     @Override

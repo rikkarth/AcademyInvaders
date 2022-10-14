@@ -16,20 +16,37 @@ public class Game {
     /**
      * Graphical Grid
      */
-    private final Grid GAME_GRID;
+    public static final Grid GAME_GRID = GridFactory.makeGrid(1024, 768);
     private Player player;
-
-    /**
-     * Container of Enemies
-     */
     private Enemy enemy;
 
     private EnemyBullet enemyBullet;
-
     /**
      * Animation delay
      */
     public static int DELAY;
+    private boolean running = false;
+
+    private Thread thread;
+
+    public synchronized void start() {
+        if (running)
+            return;
+        running = true;
+    }
+
+    private synchronized void stop() {
+        if (!running)
+            return;
+
+        running = false;
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.exit(1);
+    }
 
     /**
      * Constructs a new game
@@ -37,7 +54,7 @@ public class Game {
      * @param delay animation delay
      */
     public Game(int delay) {
-        GAME_GRID = GridFactory.makeGrid(1024, 768);
+        //GAME_GRID = GridFactory.makeGrid(1024, 768);
         this.DELAY = delay;
 
     }
@@ -50,47 +67,52 @@ public class Game {
 
         GAME_GRID.init();
 
-
         enemy = new Baljeet(GAME_GRID.makeGridPosition(500, 50, 50, 50));
 
-        player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50));
-
-        enemyBullet = new EnemyBullet(GAME_GRID.makeGridPosition(525, 710, 10, 50));
-
-
-
-
-
-
+        player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50), enemy);
     }
-
 
     /**
      * Starts the game
      *
      * @throws InterruptedException
      */
-    public void start() throws InterruptedException {
+    public void run() throws InterruptedException {
+        init();
+        long lastTime = System.nanoTime();
+        final double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        double delta = 0;
+        int updates = 0;
+        int frames = 0;
+        long timer = System.currentTimeMillis();
 
-        while (true) {
+        while (running) {
 
-            // Pause for a while
-            Thread.sleep(DELAY);
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            if (delta >= 1) {
+                updates++;
+                delta--;
+            }
+            frames++;
 
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                System.out.println(updates + " Ticks, Fps " + frames);
+                updates = 0;
+                frames = 0;
+            }
             /*
              * Insert Game Loop here
              */
+            player.shoot();
+
             //enemy.move();
-            System.out.println(enemyBullet.collisionDetector(player));
-
-
-
-
-
-
-
-
+            //System.out.println(enemyBullet.collisionDetector(player));
         }
+        stop();
     }
 }
 

@@ -7,7 +7,11 @@ public interface GridPosition {
 
     public int getHeight();
 
+    void setHeight(int i);
+
     public void setPos(int width, int height);
+
+    public int setHeight();
 
     public GridColor getColor();
 

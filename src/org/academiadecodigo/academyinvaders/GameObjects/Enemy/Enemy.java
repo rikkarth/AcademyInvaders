@@ -1,5 +1,6 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
 
+import org.academiadecodigo.academyinvaders.GameObjects.Bullets.EnemyBullet;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
@@ -9,6 +10,8 @@ import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetect
 public abstract class Enemy {
 
     private GridPosition enemyPosition;
+
+    private EnemyBullet enemyBullet;
 
     private Grid grid;
 
@@ -21,16 +24,11 @@ public abstract class Enemy {
     protected DestructionDetector destructionDetector;
 
 
-    public Enemy(GridPosition enemyPosition
-//                 GameObjects.Enemy.EnemyType enemyType
-    ) {
+    public Enemy(GridPosition enemyPosition) {
 
         this.enemyPosition = enemyPosition;
-//        this.enemyType = enemyType;
         this.destroyed = false;
         this.health = 150;
-
-        //enemyPosition.setFace(spaceShipType.getFace());
     }
 
     public void setGrid(Grid grid) {
@@ -56,7 +54,6 @@ public abstract class Enemy {
     public void setDestroyed() {
 
         this.destroyed = true;
-        //Desaparece... deixa "presente"?
     }
 
     abstract public void move();
@@ -64,6 +61,5 @@ public abstract class Enemy {
     public void movement(GridDirection direction, int distance) {
 
         getEnemyPosition().moveInDirection(direction, distance);
-        System.out.println();
     }
 }

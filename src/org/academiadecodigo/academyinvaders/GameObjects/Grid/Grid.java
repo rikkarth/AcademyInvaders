@@ -23,6 +23,4 @@ public interface Grid {
      * creates position in grid at width and height
      */
     public GridPosition makeGridPosition(int widthPos, int heightPos, int sizeX, int sizeY);
-
-
 }

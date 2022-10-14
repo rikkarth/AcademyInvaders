@@ -15,44 +15,49 @@ public abstract class AbstractBullet {
         this.bulletPosition = bulletPosition;
     }
 
-    public abstract boolean collisionDetector(Player player);
+    /**
+     * Collision Logic BulletToPlayer
+     */
+    public boolean collisionDetector(Player player) {
+        if (
+                player.getPlayerPosition().getWidth() < bulletPosition.getWidth() + bulletPosition.getObjectWidth() &&
+                player.getPlayerPosition().getWidth() + player.getPlayerPosition().getObjectWidth() > bulletPosition.getWidth() &&
+                player.getPlayerPosition().getHeight() < bulletPosition.getHeight() + bulletPosition.getObjectHeight() &&
+                player.getPlayerPosition().getObjectHeight() + player.getPlayerPosition().getHeight() > bulletPosition.getHeight()
+        ) {
+            // Collision detected!
+            System.out.println("Collided");
+            //bulletPosition.hide();
+            return true;
+        }
+        // No collision
+        System.out.println("Not Collided");
+        return false;
+    }
 
-    public abstract boolean collisionDetector(Enemy enemy);
+    /**
+     * Collision Logic BulletToPlayer
+     */
+    public boolean collisionDetector(Enemy enemy) {
+        if (
+                enemy.getEnemyPosition().getWidth() < bulletPosition.getWidth() + bulletPosition.getObjectWidth() &&
+                enemy.getEnemyPosition().getWidth() + enemy.getEnemyPosition().getObjectWidth() > bulletPosition.getWidth() &&
+                enemy.getEnemyPosition().getHeight() < bulletPosition.getHeight() + bulletPosition.getObjectHeight() &&
+                enemy.getEnemyPosition().getObjectHeight() + enemy.getEnemyPosition().getHeight() > bulletPosition.getHeight()
+        ) {
+            // Collision detected!
+            System.out.println("Collided");
+            //bulletPosition.hide();
+            return true;
+        }
+
+        // No collision
+        System.out.println("Not Collided");
+        return false;
+    }
 
     public GridPosition getBulletPosition() {
         return bulletPosition;
     }
-
-    public abstract void bulletMovement();
-
-    /*public boolean intersects(//whatever goes here) {
-        int tw = this.bulletPosition.getWidth();
-        int th = this.bulletPosition.getHeight();
-        int rw = r.width;
-        int rh = r.height;
-
-        if (rw <= 0 || rh <= 0 || tw <= 0 || th <= 0) {
-            return false;
-        }
-
-        int bulletX = this.x;
-        int bulletY = this.y;
-        int objectX = r.x;
-        int objectY = r.y;
-
-        rw += objectX;
-        rh += objectY;
-        tw += bulletX;
-        th += bulletY;
-
-        //      overflow || intersect
-        return ((rw <objectX || rw > bulletX) &&
-                (rh <objectY || rh > bulletY) &&
-                (tw < bulletX || tw > objectX) &&
-                (th < bulletY || th > objectY));
-
-        //TRUE OR FALSE
-
-    }*/
 }
 

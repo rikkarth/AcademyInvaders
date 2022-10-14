@@ -1,15 +1,18 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Player;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Bullets.PlayerBullet;
+import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxObjectPosition;
 import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
+import org.academiadecodigo.academyinvaders.GameObjects.System.Game;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+
+import java.util.LinkedList;
 
 public class Player implements KeyboardHandler {
 
@@ -25,14 +28,21 @@ public class Player implements KeyboardHandler {
 
     private int livesLeft;
 
+    boolean fire = false;
+
     protected DestructionDetector destructionDetector;
+
+    private Enemy enemy;
+    private LinkedList<PlayerBullet> b = new LinkedList<>();
 
     /**
      * Player Constructor
+     *
      * @param playerPosition provides instance with position in grid
      */
-    public Player(GridPosition playerPosition) {
+    public Player(GridPosition playerPosition, Enemy enemy) {
 
+        this.enemy = enemy;
         this.playerPosition = playerPosition;
         this.destroyed = false;
         this.health = 100;
@@ -40,10 +50,6 @@ public class Player implements KeyboardHandler {
         initKeyboard();
 
         //enemyPosition.setFace(spaceShipType.getFace());
-    }
-
-    public void setGrid(Grid grid) {
-        this.grid = grid;
     }
 
     public GridPosition getPlayerPosition() {
@@ -64,8 +70,44 @@ public class Player implements KeyboardHandler {
         //Desaparece... deixa "presente"?
     }
 
-    public void move() {
+    public PlayerBullet getPlayerBullet() {
+        return playerBullet;
+    }
 
+    public void tick() throws InterruptedException {
+        shoot();
+    }
+
+    public void move() throws InterruptedException {
+
+        while (playerBullet.getBulletPosition().getHeight() != 0) {
+
+            Thread.sleep(1);
+
+            playerBullet.getBulletPosition().moveInDirection(GridDirection.UP, 1);
+
+            if (playerBullet.collisionDetector(enemy)) {
+                playerBullet.getBulletPosition().hide();
+                break;
+            }
+
+            if (playerBullet.getBulletPosition().getHeight() == 0) {
+                playerBullet.getBulletPosition().hide();
+            }
+        }
+    }
+
+    public void shoot() throws InterruptedException {
+        if (fire) {
+
+            fire = false;
+
+            playerBullet = new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 20));
+
+            //controller.addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
+
+            move();
+        }
     }
 
     /**
@@ -100,21 +142,25 @@ public class Player implements KeyboardHandler {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
 
-            getPlayerPosition().moveInDirection(GridDirection.LEFT, 5);
+            getPlayerPosition().moveInDirection(GridDirection.LEFT, 10);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
 
-            getPlayerPosition().moveInDirection(GridDirection.RIGHT, 5);
+            getPlayerPosition().moveInDirection(GridDirection.RIGHT, 10);
+        }
+
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+
+            fire = true;
+            //controller.addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
         }
     }
-
-    /**
-     * Unused
-     */
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
 
+        }
     }
 }
 

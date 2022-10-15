@@ -10,7 +10,7 @@ public abstract class AbstractBullet {
     private GridPosition bulletPosition;
 
     public AbstractBullet(GridPosition bulletPosition) {
-        this.SPEED = 5; // passível de alteração
+        this.SPEED = 5;
         this.DAMAGE = 10;
         this.bulletPosition = bulletPosition;
     }

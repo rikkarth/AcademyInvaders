@@ -1,4 +1,12 @@
 package org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx;
 
-public class SimpleGfxFaceMapper {
+public enum SimpleGfxFaceMapper {
+
+    BALJEET,
+    PLAYER,
+    BULLET,
+    GAME,
+    MENU;
+
+
 }

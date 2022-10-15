@@ -7,7 +7,7 @@ import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPositi
 import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
 
 
-public abstract class Enemy {
+public abstract class Enemy implements Runnable {
 
     private GridPosition enemyPosition;
 

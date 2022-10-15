@@ -2,9 +2,7 @@ package org.academiadecodigo.academyinvaders.GameObjects.Bullets;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-
-import java.util.LinkedList;
-
+import org.academiadecodigo.academyinvaders.GameObjects.System.Game;
 
 public class PlayerBullet extends AbstractBullet {
 
@@ -14,11 +12,12 @@ public class PlayerBullet extends AbstractBullet {
     }
 
     public void tick() {
-            this.getBulletPosition().moveInDirection(GridDirection.UP, 5);
-        }
 
-    public void render() {
-        this.getBulletPosition().show();
+            this.getBulletPosition().moveInDirection(GridDirection.UP, 5);
     }
 
+    public void render() {
+
+        this.getBulletPosition().show();
+    }
 }

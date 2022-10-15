@@ -3,11 +3,12 @@ package org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.AbstractGridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
     private Rectangle object;
-
+    private Picture objectPicture;
     private SimpleGfxGrid grid;
 
     /**
@@ -16,13 +17,26 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
      *
      * @param grid Simple graphics grid
      */
-    public SimpleGfxObjectPosition(int width, int height, int sizeX, int sizeY, SimpleGfxGrid grid) {
+    public SimpleGfxObjectPosition(int width, int height, int sizeX, int sizeY, SimpleGfxGrid grid, SimpleGfxFaceMapper face) {
 
         super(width, height, grid);
 
         this.grid = grid;
 
-        object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
+        //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
+        switch (face) {
+            case PLAYER:
+                objectPicture = new Picture(width, height, "src/org/academiadecodigo/academyinvaders/GameObjects/Assets/ShipsPlayerEnemy/player_ship.png");
+                break;
+            case BULLET:
+                //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
+                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/Bullets/binary_bullet.png");
+                break;
+            case BALJEET:
+                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/ShipsPlayerEnemy/monster_octupus.png");
+                break;
+        }
+
         show();
     }
 
@@ -39,7 +53,9 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
         int movementY = getHeight() - initialY;
 
-        object.translate(movementX, movementY);
+        //object.translate(movementX, movementY);
+        objectPicture.translate(movementX, movementY);
+
     }
 
     public Rectangle getObject() {
@@ -48,12 +64,14 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
     @Override
     public int getObjectWidth() {
-       return object.getWidth();
+        //return object.getWidth();
+        return objectPicture.getWidth();
     }
 
     @Override
     public int getObjectHeight() {
-        return object.getHeight();
+        //return object.getHeight();
+        return objectPicture.getHeight();
     }
 
     @Override
@@ -63,11 +81,13 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
     @Override
     public void show() {
-        object.fill();
+        //object.fill();
+        objectPicture.draw();
     }
 
     @Override
     public void hide() {
-        object.delete();
+        //object.delete();
+        objectPicture.delete();
     }
 }

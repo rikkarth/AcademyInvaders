@@ -5,6 +5,7 @@ import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
 import org.academiadecodigo.academyinvaders.GameObjects.System.DestructionDetector;
 import org.academiadecodigo.academyinvaders.GameObjects.System.Game;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -16,27 +17,22 @@ import java.util.LinkedList;
 
 public class Player implements KeyboardHandler {
 
+    //Properties
+    private LinkedList<PlayerBullet> bulletList = new LinkedList<>();
+    protected DestructionDetector destructionDetector;
     private GridPosition playerPosition;
 
+    private PlayerBullet playerBullet;
+    private PlayerBullet tempBullet;
+    private Grid grid;
+    private Enemy enemy;
     private int velX = 0;
     private int velY = 0;
-
-    private Grid grid;
-
     private boolean destroyed;
-
-    private PlayerBullet playerBullet;
-
     private int health;
-
     private int livesLeft;
-
     boolean fire = false;
 
-    protected DestructionDetector destructionDetector;
-
-    private Enemy enemy;
-    private LinkedList<PlayerBullet> b = new LinkedList<>();
 
     /**
      * Player Constructor
@@ -51,37 +47,45 @@ public class Player implements KeyboardHandler {
         this.health = 100;
         this.livesLeft = 3;
         initKeyboard();
-
-        //enemyPosition.setFace(spaceShipType.getFace());
     }
+
+    //GETTERS
 
     public GridPosition getPlayerPosition() {
         return playerPosition;
     }
-
-    public void setDestructionDetector(DestructionDetector destructionDetector) {
-        this.destructionDetector = destructionDetector;
+    public PlayerBullet getPlayerBullet() {
+        return playerBullet;
     }
-
     public boolean isDestroyed() {
         return destroyed;
+    }
+
+    //SETTERS
+    public void setDestructionDetector(DestructionDetector destructionDetector) {
+        this.destructionDetector = destructionDetector;
     }
 
     public void setDestroyed() {
 
         this.destroyed = true;
-        //Desaparece... deixa "presente"?
     }
 
-    public PlayerBullet getPlayerBullet() {
-        return playerBullet;
+    public void setVelX(int velX) {
+        this.velX += velX;
     }
 
-    private LinkedList<PlayerBullet> bulletList = new LinkedList<>();
+    public void setVelY(int velY) {
+        this.velY += velY;
+    }
 
-    PlayerBullet tempBullet;
+    //METHODS
 
-    public void tick() {
+    /**
+     * Where all bullet behaviours come together
+     */
+
+    public void shoot(){
 
         for (int i = 0; i < bulletList.size(); i++) {
             tempBullet = bulletList.get(i);
@@ -97,38 +101,14 @@ public class Player implements KeyboardHandler {
                 bulletList.remove(i);
             }
         }
-
     }
 
-    public void render() {
-        for (int i = 0; i < bulletList.size(); i++) {
-            tempBullet = bulletList.get(i);
-
-            tempBullet.render();
-
-            if(tempBullet.collisionDetector(enemy)){
-               tempBullet.getBulletPosition().hide();
-            }
-            if(tempBullet.getBulletPosition().getHeight() == 0){
-                tempBullet.getBulletPosition().hide();
-            }
-        }
-    }
-
-    public void addBullet(PlayerBullet block) {
+    /**
+     * Adds bullet to LinkedList
+     * @param block requires a bullet instance
+     */
+    private void addBullet(PlayerBullet block) {
         bulletList.add(block);
-    }
-
-    public void removeBullet(PlayerBullet block) {
-        bulletList.add(block);
-    }
-
-    public void setVelX(int velX) {
-        this.velX += velX;
-    }
-
-    public void setVelY(int velY) {
-        this.velY += velY;
     }
 
     /**
@@ -174,7 +154,6 @@ public class Player implements KeyboardHandler {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
             setVelX(2);
-            System.out.println(velX);
             getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
         }
 
@@ -186,7 +165,8 @@ public class Player implements KeyboardHandler {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
 
             fire = true;
-            addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
+            addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth()+25, playerPosition.getHeight()-150, 7, 10, SimpleGfxFaceMapper.BULLET)));
+
         }
     }
 
@@ -200,7 +180,11 @@ public class Player implements KeyboardHandler {
             velX = 0;
 
         }
+    }
 
+    //@Override
+    public void run() {
+        shoot();
     }
 }
 

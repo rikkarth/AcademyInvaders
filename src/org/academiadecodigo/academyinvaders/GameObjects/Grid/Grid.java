@@ -1,6 +1,7 @@
 package org.academiadecodigo.academyinvaders.GameObjects.Grid;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
 
 public interface Grid {
 
@@ -22,5 +23,5 @@ public interface Grid {
     /**
      * creates position in grid at width and height
      */
-    public GridPosition makeGridPosition(int widthPos, int heightPos, int sizeX, int sizeY);
+    public GridPosition makeGridPosition(int widthPos, int heightPos, int sizeX, int sizeY, SimpleGfxFaceMapper face);
 }

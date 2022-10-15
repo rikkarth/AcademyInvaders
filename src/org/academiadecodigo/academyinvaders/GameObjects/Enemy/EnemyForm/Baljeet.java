@@ -9,7 +9,9 @@ import org.academiadecodigo.academyinvaders.GameObjects.System.Game;
 public class Baljeet extends Enemy {
 
     int movementCounter = 0;
-    boolean loop = true;
+    boolean stepOne = true;
+    boolean stepTwo = false;
+    boolean stepThree = false;
 
     public Baljeet(GridPosition enemyPosition) {
         super(enemyPosition);
@@ -18,7 +20,30 @@ public class Baljeet extends Enemy {
     @Override
     public void move() {
 
-        while (loop) {
+        if(stepOne) {
+            if (this.getEnemyPosition().getHeight() != 150) {
+
+                movement(GridDirection.DOWN, 5);
+                return;
+            }
+            if (this.getEnemyPosition().getWidth() != 300) {
+
+                movement(GridDirection.LEFT, 5);
+                return;
+            }
+            if(this.getEnemyPosition().getHeight() != 300 ){
+                System.out.println(this.getEnemyPosition().getHeight());
+                movement(GridDirection.DOWN, 5);
+                return;
+            }
+            if(this.getEnemyPosition().getHeight() == 300){
+                System.out.println(this.getEnemyPosition().getHeight());
+                movement(GridDirection.DOWN,0);
+            }
+        }
+
+
+        /*while (loop) {
             if (movementCounter >= 0 && movementCounter <= 100) {
                 try {
                     Thread.sleep(5);
@@ -48,6 +73,7 @@ public class Baljeet extends Enemy {
         }
 
         System.out.println(movementCounter);
+    }*/
     }
 }
 

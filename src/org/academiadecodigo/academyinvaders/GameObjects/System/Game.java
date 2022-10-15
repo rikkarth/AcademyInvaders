@@ -40,6 +40,8 @@ public class Game implements Runnable {
 
         thread.start();
         threadTwo.start();
+
+
     }
 
     private synchronized void stop() {
@@ -126,7 +128,6 @@ public class Game implements Runnable {
             /*
              * Insert Game Loop here
              */
-            baljeet.move();
 
 
 
@@ -139,10 +140,9 @@ public class Game implements Runnable {
     }
 
     private void tick(){
+
         player.tick();
-
-
-
+        baljeet.move();
     }
 
     private void render(){

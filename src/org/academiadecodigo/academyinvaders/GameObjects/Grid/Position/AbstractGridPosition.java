@@ -36,8 +36,13 @@ public abstract class AbstractGridPosition implements GridPosition {
     }
 
     @Override
-    public void setHeight(int i) {
-        this.height = i;
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    @Override
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     @Override
@@ -46,7 +51,6 @@ public abstract class AbstractGridPosition implements GridPosition {
         this.height = height;
         show();
     }
-
 
     @Override
     public GridColor getColor() {
@@ -86,10 +90,10 @@ public abstract class AbstractGridPosition implements GridPosition {
         return this.width == position.getWidth() && this.height == position.getHeight() ? true : false;
     }
 
-    // movimentos em gridposition para apoiar o switch movedirection;
-    // permite o movimento consoante a distancia até o maximo imposto pela Grid no Down and Right
-    // permite o movimento consoante a distancia até o maximo imposto pela relaçao do get da position no Up e Left
-
+    /**
+     * Move logic
+     * @param distance should always be 1;
+     */
     public void moveUp(int distance) {
 
         int maxUpHeight = distance < getHeight() ? distance : getHeight();

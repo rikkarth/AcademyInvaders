@@ -18,6 +18,9 @@ public class Player implements KeyboardHandler {
 
     private GridPosition playerPosition;
 
+    private int velX = 0;
+    private int velY = 0;
+
     private Grid grid;
 
     private boolean destroyed;
@@ -74,40 +77,58 @@ public class Player implements KeyboardHandler {
         return playerBullet;
     }
 
-    public void tick() throws InterruptedException {
-        shoot();
-    }
+    private LinkedList<PlayerBullet> bulletList = new LinkedList<>();
 
-    public void move() throws InterruptedException {
+    PlayerBullet tempBullet;
 
-        while (playerBullet.getBulletPosition().getHeight() != 0) {
+    public void tick() {
 
-            Thread.sleep(1);
+        for (int i = 0; i < bulletList.size(); i++) {
+            tempBullet = bulletList.get(i);
 
-            playerBullet.getBulletPosition().moveInDirection(GridDirection.UP, 1);
-
-            if (playerBullet.collisionDetector(enemy)) {
-                playerBullet.getBulletPosition().hide();
-                break;
+            tempBullet.tick();
+            if(tempBullet.collisionDetector(enemy)){
+                tempBullet.getBulletPosition().hide();
+                bulletList.remove(i);
             }
 
-            if (playerBullet.getBulletPosition().getHeight() == 0) {
-                playerBullet.getBulletPosition().hide();
+            if(tempBullet.getBulletPosition().getHeight() == 0){
+                tempBullet.getBulletPosition().hide();
+                bulletList.remove(i);
+            }
+        }
+
+    }
+
+    public void render() {
+        for (int i = 0; i < bulletList.size(); i++) {
+            tempBullet = bulletList.get(i);
+
+            tempBullet.render();
+
+            if(tempBullet.collisionDetector(enemy)){
+               tempBullet.getBulletPosition().hide();
+            }
+            if(tempBullet.getBulletPosition().getHeight() == 0){
+                tempBullet.getBulletPosition().hide();
             }
         }
     }
 
-    public void shoot() throws InterruptedException {
-        if (fire) {
+    public void addBullet(PlayerBullet block) {
+        bulletList.add(block);
+    }
 
-            fire = false;
+    public void removeBullet(PlayerBullet block) {
+        bulletList.add(block);
+    }
 
-            playerBullet = new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 20));
+    public void setVelX(int velX) {
+        this.velX += velX;
+    }
 
-            //controller.addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
-
-            move();
-        }
+    public void setVelY(int velY) {
+        this.velY += velY;
     }
 
     /**
@@ -129,9 +150,19 @@ public class Player implements KeyboardHandler {
         shootPressed.setKey(KeyboardEvent.KEY_SPACE);
         shootPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent leftReleased = new KeyboardEvent();
+        leftReleased.setKey(KeyboardEvent.KEY_A);
+        leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
+        KeyboardEvent rightReleased = new KeyboardEvent();
+        rightReleased.setKey(KeyboardEvent.KEY_D);
+        rightReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
+
         keyboard.addEventListener(leftPressed);
         keyboard.addEventListener(rightPressed);
         keyboard.addEventListener(shootPressed);
+        keyboard.addEventListener(rightReleased);
+        keyboard.addEventListener(leftReleased);
     }
 
     /**
@@ -140,28 +171,38 @@ public class Player implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
 
-            getPlayerPosition().moveInDirection(GridDirection.LEFT, 10);
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
+            setVelX(2);
+            System.out.println(velX);
+            getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
-
-            getPlayerPosition().moveInDirection(GridDirection.RIGHT, 10);
+            setVelX(2);
+            getPlayerPosition().moveInDirection(GridDirection.RIGHT, 10 + velX);
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
 
             fire = true;
-            //controller.addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
+            addBullet(new PlayerBullet(Game.GAME_GRID.makeGridPosition(playerPosition.getWidth(), playerPosition.getHeight(), 7, 10)));
         }
     }
+
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
+            velX = 0;
+        }
+
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
+            velX = 0;
 
         }
+
     }
 }
+
 
 

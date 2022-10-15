@@ -9,7 +9,7 @@ import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
 /**
  * The game logic
  */
-public class Game {
+public class Game implements Runnable {
 
     //PARAMETERS
 
@@ -18,21 +18,28 @@ public class Game {
      */
     public static final Grid GAME_GRID = GridFactory.makeGrid(1024, 768);
     private Player player;
-    private Enemy enemy;
+    private Enemy baljeet;
+
+    private Thread thread;
+    private Thread threadTwo;
 
     private EnemyBullet enemyBullet;
     /**
      * Animation delay
      */
     public static int DELAY;
-    private boolean running = false;
+    private boolean running = true;
 
-    private Thread thread;
 
     public synchronized void start() {
         if (running)
             return;
+
         running = true;
+        thread = new Thread(this);
+
+        thread.start();
+        threadTwo.start();
     }
 
     private synchronized void stop() {
@@ -50,12 +57,13 @@ public class Game {
 
     /**
      * Constructs a new game
-     *
+     *d
      * @param delay animation delay
      */
     public Game(int delay) {
         //GAME_GRID = GridFactory.makeGrid(1024, 768);
         this.DELAY = delay;
+        init();
 
     }
 
@@ -65,22 +73,25 @@ public class Game {
      */
     public void init() {
 
+
         GAME_GRID.init();
 
-        enemy = new Baljeet(GAME_GRID.makeGridPosition(500, 50, 50, 50));
+        baljeet = new Baljeet(GAME_GRID.makeGridPosition(500, 50, 50, 50));
 
-        player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50), enemy);
+
+        player = new Player(GAME_GRID.makeGridPosition(500, 700, 50, 50), baljeet);
     }
+
+
 
     /**
      * Starts the game
      *
      * @throws InterruptedException
      */
-    public void run() throws InterruptedException {
-        init();
+    public void run() {
         long lastTime = System.nanoTime();
-        final double amountOfTicks = 60.0;
+        final double amountOfTicks = 60;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         int updates = 0;
@@ -88,14 +99,22 @@ public class Game {
         long timer = System.currentTimeMillis();
 
         while (running) {
-
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
             if (delta >= 1) {
+                tick();
+                /*============================*/
+
+
+
+
+
+
                 updates++;
                 delta--;
             }
+            render();
             frames++;
 
             if (System.currentTimeMillis() - timer > 1000) {
@@ -107,12 +126,27 @@ public class Game {
             /*
              * Insert Game Loop here
              */
-            player.shoot();
+            baljeet.move();
 
-            //enemy.move();
-            //System.out.println(enemyBullet.collisionDetector(player));
+
+
+
+
+
+
         }
         stop();
+    }
+
+    private void tick(){
+        player.tick();
+
+
+
+    }
+
+    private void render(){
+
     }
 }
 

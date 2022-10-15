@@ -9,5 +9,9 @@ public class EnemyBullet extends AbstractBullet {
     public EnemyBullet(GridPosition bulletPosition) {
         super(bulletPosition);
     }
+
+
+
+
 }
 

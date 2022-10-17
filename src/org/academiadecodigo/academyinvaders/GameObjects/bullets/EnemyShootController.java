@@ -23,7 +23,7 @@ public class EnemyShootController implements Runnable {
 
     public boolean lineOfSight(Player player) {
         if (
-                player.getPlayerPosition().getWidth() < enemy.getEnemyPosition().getWidth() + enemy.getEnemyPosition().getObjectWidth() &&
+                        player.getPlayerPosition().getWidth() < enemy.getEnemyPosition().getWidth() + enemy.getEnemyPosition().getObjectWidth() &&
                         player.getPlayerPosition().getWidth() + player.getPlayerPosition().getObjectWidth() > enemy.getEnemyPosition().getWidth()
         ) {
             // Collision detected!
@@ -74,7 +74,7 @@ public class EnemyShootController implements Runnable {
                     player.setHealth(player.getHealth() - enemyBullet.DAMAGE);
                 }
 
-                System.out.println("Player Health: " + player.getHealth());
+                //System.out.println("Player Health: " + player.getHealth());
 
                 if (player.getHealth() == 0) {
 
@@ -90,7 +90,6 @@ public class EnemyShootController implements Runnable {
             }
         }
     }
-
 
     @Override
     public void run() {

@@ -18,6 +18,7 @@ public class Player implements KeyboardHandler, Runnable {
     private LinkedList<PlayerBullet> bulletList = new LinkedList<>();
     private GridPosition playerPosition;
     private PlayerBullet playerBullet;
+    DestroyedAnimation destroyedAnimation;
     private Enemy enemy;
     private int velX = 0;
     private int velY = 0;
@@ -42,6 +43,7 @@ public class Player implements KeyboardHandler, Runnable {
         this.livesLeft = 3;
         this.spaceHeld = false;
         playerKeyboard.initKeyboard();
+        this.destroyedAnimation = new DestroyedAnimation(this);
     }
 
     //GETTERS
@@ -63,7 +65,7 @@ public class Player implements KeyboardHandler, Runnable {
     public void setDestroyed() {
 
         this.destroyed = true;
-        System.out.println(isDestroyed());
+        //System.out.println(isDestroyed());
     }
 
     public void setHealth(int health) {
@@ -82,6 +84,7 @@ public class Player implements KeyboardHandler, Runnable {
 
     /**
      * Player gets bullet list then shoots bullet through the tick method in PlayerBullet
+     *
      * @see PlayerBullet
      * Checks if bullet has collided with enemy or top edge of the grid: if yes, hides bullet graphically and removes it from linked list
      * chekcs if enemy health is different from 0, if yes, sets health to new value
@@ -121,83 +124,41 @@ public class Player implements KeyboardHandler, Runnable {
         }
     }
 
-    public void checkIfDestroyed() {
-        int delay = 150;
+    /**
+     * Plays a frame by frame animation if destroyed
+     */
+    private void playDestroyedAnimationIfDestroyed() {
+            System.out.println();
         if (isDestroyed()) {
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.2.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.3.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.4.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.5.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.6.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.7.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png"));
-            this.getPlayerPosition().getObject().draw();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            int delay = 150;
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.2.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.3.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.4.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.5.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.6.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.7.png", delay);
+
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png", 1000);
+
             this.getPlayerPosition().getObject().delete();
 
             Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/game_over_title.png");
+
             gameOver.draw();
         }
-    }
 
+    }
 
     /**
      * Adds bullet to LinkedList
+     *
      * @param block requires a bullet instance
      */
     private void addBullet(PlayerBullet block) {
@@ -213,11 +174,11 @@ public class Player implements KeyboardHandler, Runnable {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
 
-                if (!isDestroyed()) {
+            if (!isDestroyed()) {
 
-                    setVelX(2);
+                setVelX(2);
 
-                    getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
+                getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
             }
         }
 
@@ -231,7 +192,7 @@ public class Player implements KeyboardHandler, Runnable {
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-            if(!spaceHeld) {
+            if (!spaceHeld) {
                 spaceHeld = true;
                 if (!isDestroyed()) {
 
@@ -251,15 +212,17 @@ public class Player implements KeyboardHandler, Runnable {
             velX = 0;
         }
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
             spaceHeld = false;
         }
     }
 
     //@Override
     public void run() {
+
         while (!isDestroyed()) {
-            checkIfDestroyed();
+
+            playDestroyedAnimationIfDestroyed();
         }
     }
 }

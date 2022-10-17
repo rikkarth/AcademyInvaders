@@ -1,8 +1,8 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
+package org.academiadecodigo.academyinvaders.GameObjects.bullets;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.EnemyBullet;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Enemy;
 import org.academiadecodigo.academyinvaders.GameObjects.Main;
-import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Player;
 import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
 
 import java.util.LinkedList;
@@ -14,7 +14,7 @@ public class EnemyShootController implements Runnable {
 
     Player player;
 
-    private EnemyBullet tempBullet;
+    private EnemyBullet enemyBullet;
 
     public EnemyShootController(Enemy enemy, Player player) {
         this.enemy = enemy;
@@ -58,20 +58,20 @@ public class EnemyShootController implements Runnable {
 
         for (int i = 0; i < bulletList.size(); i++) {
 
-            tempBullet = bulletList.get(i);
+            enemyBullet = bulletList.get(i);
 
-            tempBullet.tick();
+            enemyBullet.tick();
 
 
-            if (tempBullet.collisionDetector(player)) {
+            if (enemyBullet.ifCollided(player)) {
 
-                tempBullet.getBulletPosition().hide();
+                enemyBullet.getBulletPosition().hide();
 
                 bulletList.remove(i);
 
                 if (player.getHealth() != 0) {
 
-                    player.setHealth(player.getHealth() - tempBullet.getDAMAGE());
+                    player.setHealth(player.getHealth() - enemyBullet.DAMAGE);
                 }
 
                 System.out.println("Player Health: " + player.getHealth());
@@ -82,9 +82,9 @@ public class EnemyShootController implements Runnable {
                 }
             }
 
-            if (tempBullet.getBulletPosition().getHeight() >= 800) {
+            if (enemyBullet.getBulletPosition().getHeight() >= 800) {
 
-                tempBullet.getBulletPosition().hide();
+                enemyBullet.getBulletPosition().hide();
 
                 bulletList.remove(i);
             }

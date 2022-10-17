@@ -1,12 +1,11 @@
 package org.academiadecodigo.academyinvaders.GameObjects;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.EnemyBullet;
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.EnemyForm.Baljeet;
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.EnemyShootController;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Enemy;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.enemies.Baljeet;
+import org.academiadecodigo.academyinvaders.GameObjects.bullets.EnemyShootController;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridFactory;
-import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Player;
 import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
 import org.academiadecodigo.academyinvaders.GameObjects.System.Sound;
 
@@ -30,7 +29,6 @@ public class Main implements Runnable {
     private Enemy baljeet;
     private EnemyShootController baljeetShootController;
 
-    private EnemyBullet enemyBullet;
 
     //SYNCED START
     private synchronized void start() {

@@ -5,5 +5,4 @@ public enum GridDirection {
     DOWN,
     LEFT,
     RIGHT;
-
 }

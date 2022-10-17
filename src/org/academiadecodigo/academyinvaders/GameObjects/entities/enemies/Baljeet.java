@@ -1,9 +1,9 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Enemy.EnemyForm;
+package org.academiadecodigo.academyinvaders.GameObjects.entities.enemies;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Enemy;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Player;
 
 public class Baljeet extends Enemy implements Runnable {
 
@@ -12,6 +12,9 @@ public class Baljeet extends Enemy implements Runnable {
         super(enemyPosition, player);
     }
 
+    /**
+     * Method move will run movement patterns recursively while enemy not destroyed
+     */
     @Override
     public void move() {
 
@@ -25,7 +28,6 @@ public class Baljeet extends Enemy implements Runnable {
     }
 
     public void patternOne() {
-
 
         linearMovement(GridDirection.LEFT, 200, 5);
 
@@ -46,7 +48,6 @@ public class Baljeet extends Enemy implements Runnable {
         shakeHarder();
 
         linearMovement(GridDirection.UP, 200, 2);;
-
     }
 
     @Override

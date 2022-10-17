@@ -26,17 +26,17 @@ public class SimpleGfxObjectPosition extends AbstractGridPosition {
         //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
         switch (face) {
             case PLAYER:
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/ShipsPlayerEnemy/player_ship.png");
+                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/player_ship.png");
                 break;
             case BULLET:
                 //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/Bullets/binary_bullet.png");
+                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/binary_bullet.png");
                 break;
             case BULLETGREEN:
-                objectPicture =  new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/Bullets/greenbullet_energy_small.png");
+                objectPicture =  new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/greenbullet_energy_small.png");
                 break;
             case BALJEET:
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/Assets/ShipsPlayerEnemy/monster_octupus.png");
+                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/monster_octupus.png");
                 break;
         }
 

@@ -1,10 +1,9 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Enemy;
+package org.academiadecodigo.academyinvaders.GameObjects.entities;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.EnemyBullet;
+import org.academiadecodigo.academyinvaders.GameObjects.bullets.EnemyBullet;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
@@ -182,7 +181,7 @@ public abstract class Enemy implements Runnable {
         int delay = 150;
         if (isDestroyed()) {
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.1.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -190,7 +189,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.2.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.2.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -198,7 +197,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.3.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.3.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -206,7 +205,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.4.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.4.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -214,7 +213,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.5.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.5.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -222,7 +221,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.6.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.6.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -230,7 +229,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.7.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.7.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -238,7 +237,7 @@ public abstract class Enemy implements Runnable {
                 throw new RuntimeException(e);
             }
             this.getEnemyPosition().getObject().delete();
-            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.8.png"));
+            this.getEnemyPosition().setObject(new Picture(getEnemyPosition().getWidth(), getEnemyPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png"));
             this.getEnemyPosition().getObject().draw();
             try {
                 Thread.sleep(1000);
@@ -247,7 +246,7 @@ public abstract class Enemy implements Runnable {
             }
             this.getEnemyPosition().getObject().delete();
 
-            Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/victory_title.png");
+            Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/victory_title.png");
             gameOver.draw();
         }
     }

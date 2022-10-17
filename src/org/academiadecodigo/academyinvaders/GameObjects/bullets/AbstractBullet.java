@@ -1,24 +1,22 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Bullets;
+package org.academiadecodigo.academyinvaders.GameObjects.bullets;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Enemy;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
-import org.academiadecodigo.academyinvaders.GameObjects.Player.Player;
+import org.academiadecodigo.academyinvaders.GameObjects.entities.Player;
 
 public abstract class AbstractBullet {
-    private final int DAMAGE;
-    Player player;
+    protected final int DAMAGE;
     private GridPosition bulletPosition;
 
     public AbstractBullet(GridPosition bulletPosition, int bulletDamage) {
         this.DAMAGE = bulletDamage;
         this.bulletPosition = bulletPosition;
-        this.player = player;
     }
 
     /**
      * Collision Logic BulletToPlayer
      */
-    public boolean collisionDetector(Player player) {
+    public boolean ifCollided(Player player) {
         if (
                 player.getPlayerPosition().getWidth() < bulletPosition.getWidth() + bulletPosition.getObjectWidth() &&
                 player.getPlayerPosition().getWidth() + player.getPlayerPosition().getObjectWidth() > bulletPosition.getWidth() &&
@@ -27,7 +25,6 @@ public abstract class AbstractBullet {
         ) {
             // Collision detected!
             //System.out.println("Collided");
-            //bulletPosition.hide();
             return true;
         }
         // No collision
@@ -38,7 +35,7 @@ public abstract class AbstractBullet {
     /**
      * Collision Logic BulletToEnemy
      */
-    public boolean collisionDetector(Enemy enemy) {
+    public boolean ifCollided(Enemy enemy) {
         if (
                 enemy.getEnemyPosition().getWidth() < bulletPosition.getWidth() + bulletPosition.getObjectWidth() &&
                 enemy.getEnemyPosition().getWidth() + enemy.getEnemyPosition().getObjectWidth() > bulletPosition.getWidth() &&
@@ -47,7 +44,6 @@ public abstract class AbstractBullet {
         ) {
             // Collision detected!
             //System.out.println("Collided");
-            //bulletPosition.hide();
             return true;
         }
 
@@ -62,9 +58,6 @@ public abstract class AbstractBullet {
         return bulletPosition;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public int getDAMAGE() {
         return DAMAGE;

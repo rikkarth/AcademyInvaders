@@ -6,8 +6,6 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import static org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper.GAME;
-
 public class SimpleGfxGrid implements Grid {
 
 
@@ -15,12 +13,9 @@ public class SimpleGfxGrid implements Grid {
     //<<<<<<<<<<<<<<<<<<<<<<<<<<background>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
     private Rectangle screenfiller;
     private Rectangle grid;
-
     private Picture gridfill;
     private final int PADDING = 10;
-
     private final int GRID_WIDTH;
-
     private final int GRID_HEIGHT;
 
     //<<<<center elements>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -62,19 +57,19 @@ public class SimpleGfxGrid implements Grid {
                 screenfiller.setColor(Color.BLACK);
                 this.grid = new Rectangle(PADDING + 200, PADDING + 100, GRID_WIDTH, GRID_HEIGHT);//GRID YELLOW RECTANGLE ONLY FILL;
                 grid.setColor(Color.YELLOW);
-                this.gridfill = new Picture(PADDING + 200, PADDING + 100, "org/academiadecodigo/academyinvaders/GameObjects/Assets/Backgrounds/blackhole.jpeg");
+                this.gridfill = new Picture(PADDING + 200, PADDING + 100, "org/academiadecodigo/academyinvaders/GameObjects/assets/Backgrounds/blackhole.jpeg");
 
                 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<center elements>>>>>>>>>>>>>>>>>>>><<
-                this.arcadetitle = new Picture(474, 0, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/academytitle.png");
+                this.arcadetitle = new Picture(474, 0, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/academytitle.png");
                 //<<<<<<<<<<<<<<<<left side elements>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                this.scoreTitle = new Picture(17, 200, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/score_subtitle.png");
-                this.healthPlayer = new Picture(15, 400, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/live_status_title.png");
-                this.healthStatusBar = new Picture(10, 480, "org/academiadecodigo/academyinvaders/GameObjects/Assets/bar/100percent_bar.png");
-                this.scoreBar = new Picture(10, 270, "org/academiadecodigo/academyinvaders/GameObjects/Assets/bar/score_box.png");
+                this.scoreTitle = new Picture(17, 200, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/score_subtitle.png");
+                this.healthPlayer = new Picture(15, 400, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/live_status_title.png");
+                this.healthStatusBar = new Picture(10, 480, "org/academiadecodigo/academyinvaders/GameObjects/assets/bar/100percent_bar.png");
+                this.scoreBar = new Picture(10, 270, "org/academiadecodigo/academyinvaders/GameObjects/assets/bar/score_box.png");
                 //<<<<<<<<<<<<<right side elements<<<<<<<<<<<<<<<<<<<<<<<<<
-                this.enemyhealthtitle = new Picture(1250, 400, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/enemy_heath_subtitle.png");
-                this.enemyhealthbar = new Picture(1235, 480, "org/academiadecodigo/academyinvaders/GameObjects/Assets/bar/shield_error_bar.png");
-                this.level = new Picture(1240, 200, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/small_level_one.png");
+                this.enemyhealthtitle = new Picture(1250, 400, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/enemy_heath_subtitle.png");
+                this.enemyhealthbar = new Picture(1235, 480, "org/academiadecodigo/academyinvaders/GameObjects/assets/bar/shield_error_bar.png");
+                this.level = new Picture(1240, 200, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/small_level_one.png");
                 break;
         }
     }
@@ -127,5 +122,4 @@ public class SimpleGfxGrid implements Grid {
         public int getGridY () {
             return grid.getY();
         }
-
     }

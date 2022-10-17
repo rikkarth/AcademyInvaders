@@ -1,15 +1,12 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Player;
+package org.academiadecodigo.academyinvaders.GameObjects.entities;
 
-import org.academiadecodigo.academyinvaders.GameObjects.Bullets.PlayerBullet;
-import org.academiadecodigo.academyinvaders.GameObjects.Enemy.Enemy;
-import org.academiadecodigo.academyinvaders.GameObjects.Grid.Grid;
+import org.academiadecodigo.academyinvaders.GameObjects.System.PlayerKeyboard;
+import org.academiadecodigo.academyinvaders.GameObjects.bullets.PlayerBullet;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
 import org.academiadecodigo.academyinvaders.GameObjects.Main;
 import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -20,17 +17,14 @@ public class Player implements KeyboardHandler, Runnable {
     //Properties
     private LinkedList<PlayerBullet> bulletList = new LinkedList<>();
     private GridPosition playerPosition;
-
     private PlayerBullet playerBullet;
-    private PlayerBullet tempBullet;
-    private Grid grid;
     private Enemy enemy;
     private int velX = 0;
     private int velY = 0;
     private boolean destroyed;
     private int health;
     private int livesLeft;
-    boolean fire = false;
+    private boolean spaceHeld;
 
 
     /**
@@ -40,22 +34,20 @@ public class Player implements KeyboardHandler, Runnable {
      */
     public Player(GridPosition playerPosition, Enemy enemy) {
 
+        PlayerKeyboard playerKeyboard = new PlayerKeyboard(this);
         this.enemy = enemy;
         this.playerPosition = playerPosition;
         this.destroyed = false;
         this.health = 100;
         this.livesLeft = 3;
-        initKeyboard();
+        this.spaceHeld = false;
+        playerKeyboard.initKeyboard();
     }
 
     //GETTERS
 
     public GridPosition getPlayerPosition() {
         return playerPosition;
-    }
-
-    public PlayerBullet getPlayerBullet() {
-        return playerBullet;
     }
 
     public boolean isDestroyed() {
@@ -89,24 +81,27 @@ public class Player implements KeyboardHandler, Runnable {
     //METHODS
 
     /**
-     * Where all bullet behaviours come together
+     * Player gets bullet list then shoots bullet through the tick method in PlayerBullet
+     * @see PlayerBullet
+     * Checks if bullet has collided with enemy or top edge of the grid: if yes, hides bullet graphically and removes it from linked list
+     * chekcs if enemy health is different from 0, if yes, sets health to new value
      */
-
     public void shoot() {
 
         for (int i = 0; i < bulletList.size(); i++) {
-            tempBullet = bulletList.get(i);
+            playerBullet = bulletList.get(i);
 
-            tempBullet.tick();
-            if (tempBullet.collisionDetector(enemy)) {
+            playerBullet.tick();
 
-                tempBullet.getBulletPosition().hide();
+            if (playerBullet.ifCollided(enemy)) {
+
+                playerBullet.getBulletPosition().hide();
 
                 bulletList.remove(i);
 
                 if (enemy.getHealth() != 0) {
 
-                    enemy.setHealth(enemy.getHealth() - tempBullet.getDAMAGE());
+                    enemy.setHealth(enemy.getHealth() - playerBullet.getDAMAGE());
                 }
 
                 //System.out.println(enemy.getHealth());
@@ -117,9 +112,9 @@ public class Player implements KeyboardHandler, Runnable {
                 }
             }
 
-            if (tempBullet.getBulletPosition().getHeight() == 0) {
+            if (playerBullet.getBulletPosition().getHeight() == 0) {
 
-                tempBullet.getBulletPosition().hide();
+                playerBullet.getBulletPosition().hide();
 
                 bulletList.remove(i);
             }
@@ -130,7 +125,7 @@ public class Player implements KeyboardHandler, Runnable {
         int delay = 150;
         if (isDestroyed()) {
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.1.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -138,7 +133,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.2.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.2.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -146,7 +141,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.3.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.3.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -154,7 +149,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.4.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.4.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -162,7 +157,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.5.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.5.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -170,7 +165,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.6.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.6.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -178,7 +173,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.7.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.7.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(delay);
@@ -186,7 +181,7 @@ public class Player implements KeyboardHandler, Runnable {
                 throw new RuntimeException(e);
             }
             this.getPlayerPosition().getObject().delete();
-            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/Assets/ExplosionEffects/exp.8.png"));
+            this.getPlayerPosition().setObject(new Picture(getPlayerPosition().getWidth(), getPlayerPosition().getHeight(), "org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png"));
             this.getPlayerPosition().getObject().draw();
             try {
                 Thread.sleep(1000);
@@ -195,7 +190,7 @@ public class Player implements KeyboardHandler, Runnable {
             }
             this.getPlayerPosition().getObject().delete();
 
-            Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/Assets/TitlesAndSubtitles/game_over_title.png");
+            Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/game_over_title.png");
             gameOver.draw();
         }
     }
@@ -203,7 +198,6 @@ public class Player implements KeyboardHandler, Runnable {
 
     /**
      * Adds bullet to LinkedList
-     *
      * @param block requires a bullet instance
      */
     private void addBullet(PlayerBullet block) {
@@ -211,66 +205,38 @@ public class Player implements KeyboardHandler, Runnable {
     }
 
     /**
-     * Initializes keyboard
-     */
-    private void initKeyboard() {
-
-        Keyboard keyboard = new Keyboard(this);
-
-        KeyboardEvent rightPressed = new KeyboardEvent();
-        rightPressed.setKey(KeyboardEvent.KEY_D);
-        rightPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        KeyboardEvent leftPressed = new KeyboardEvent();
-        leftPressed.setKey(KeyboardEvent.KEY_A);
-        leftPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        KeyboardEvent shootPressed = new KeyboardEvent();
-        shootPressed.setKey(KeyboardEvent.KEY_SPACE);
-        shootPressed.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        KeyboardEvent leftReleased = new KeyboardEvent();
-        leftReleased.setKey(KeyboardEvent.KEY_A);
-        leftReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-
-        KeyboardEvent rightReleased = new KeyboardEvent();
-        rightReleased.setKey(KeyboardEvent.KEY_D);
-        rightReleased.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
-
-        keyboard.addEventListener(leftPressed);
-        keyboard.addEventListener(rightPressed);
-        keyboard.addEventListener(shootPressed);
-        keyboard.addEventListener(rightReleased);
-        keyboard.addEventListener(leftReleased);
-    }
-
-    /**
-     * Moves player left and right
+     * Player Keyboard Logic
+     * Controls movement and shooting
      */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_A) {
 
-            if (!isDestroyed()) {
-                setVelX(2);
-                getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
+                if (!isDestroyed()) {
+
+                    setVelX(2);
+
+                    getPlayerPosition().moveInDirection(GridDirection.LEFT, 10 + velX);
             }
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
             if (!isDestroyed()) {
+
                 setVelX(2);
+
                 getPlayerPosition().moveInDirection(GridDirection.RIGHT, 10 + velX);
             }
         }
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            if(!spaceHeld) {
+                spaceHeld = true;
+                if (!isDestroyed()) {
 
-            if (!isDestroyed()) {
-                fire = true;
-                addBullet(new PlayerBullet(Main.GAME_GRID.makeGridPosition(playerPosition.getWidth() + 25, playerPosition.getHeight() - 150, 7, 10, SimpleGfxFaceMapper.BULLET)));
+                    addBullet(new PlayerBullet(Main.GAME_GRID.makeGridPosition(playerPosition.getWidth() + 25, playerPosition.getHeight() - 150, 7, 10, SimpleGfxFaceMapper.BULLET)));
+                }
             }
         }
     }
@@ -283,7 +249,10 @@ public class Player implements KeyboardHandler, Runnable {
 
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_D) {
             velX = 0;
+        }
 
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+            spaceHeld = false;
         }
     }
 

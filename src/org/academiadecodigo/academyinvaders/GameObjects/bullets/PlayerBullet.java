@@ -1,4 +1,4 @@
-package org.academiadecodigo.academyinvaders.GameObjects.Bullets;
+package org.academiadecodigo.academyinvaders.GameObjects.bullets;
 
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
 import org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;

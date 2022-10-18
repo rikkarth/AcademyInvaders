@@ -19,20 +19,19 @@ public class SimpleGfxGrid implements Grid {
     private final int GRID_HEIGHT;
 
     //<<<<center elements>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    Picture stargame;
-    Picture arcadetitle;
+    private Picture stargame;
+    private Picture arcadetitle;
     //<<<<<<<<<<<<left side elements<<<<<<<<<<<<<<<<<<<<
-    Picture scoreTitle;
-    Picture healthPlayer;
-    Picture healthStatusBar;
-    Picture scoreBar;
-    Picture keys;
+    private Picture scoreTitle;
+    private Picture healthPlayer;
+    private Picture healthStatusBar;
+    private Picture scoreBar;
+    private Picture keys;
 
     //<<<<<<<<<<<right side elements<<<<<
-    Picture enemyhealthtitle;
-    Picture enemyhealthbar;
-    Picture level;
-
+    private Picture enemyhealthtitle;
+    private Picture enemyhealthbar;
+    private Picture level;
 
     //CONSTRUCTOR
 
@@ -54,9 +53,9 @@ public class SimpleGfxGrid implements Grid {
 
                 //<<<<<<<<<<<<<<<<<<<<<<<<<<<background<<<<<<<<<<<<<<<<<<<<<<<<
                 this.screenfiller = new Rectangle(0, 0, 1434, 968);
-                screenfiller.setColor(Color.BLACK);
+                this.screenfiller.setColor(Color.BLACK);
                 this.grid = new Rectangle(PADDING + 200, PADDING + 100, GRID_WIDTH, GRID_HEIGHT);//GRID YELLOW RECTANGLE ONLY FILL;
-                grid.setColor(Color.YELLOW);
+                this.grid.setColor(Color.YELLOW);
                 this.gridfill = new Picture(PADDING + 200, PADDING + 100, "org/academiadecodigo/academyinvaders/GameObjects/assets/Backgrounds/blackhole.jpeg");
 
                 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<center elements>>>>>>>>>>>>>>>>>>>><<
@@ -79,12 +78,12 @@ public class SimpleGfxGrid implements Grid {
          */
         public void init () {
             //background
-            screenfiller.fill();
-            gridfill.draw();
+            this.screenfiller.fill();
+            this.gridfill.draw();
             //<<center>>
-            arcadetitle.draw();
-            level.draw();
-            grid.draw();
+            this.arcadetitle.draw();
+            this.level.draw();
+            this.grid.draw();
         }
 
         //GETTERS
@@ -111,7 +110,7 @@ public class SimpleGfxGrid implements Grid {
          * @return the x position of the grid
          */
         public int getGridX () {
-            return grid.getX();
+            return this.grid.getX();
         }
 
         /**
@@ -120,6 +119,6 @@ public class SimpleGfxGrid implements Grid {
          * @return the y position of the grid
          */
         public int getGridY () {
-            return grid.getY();
+            return this.grid.getY();
         }
     }

@@ -126,11 +126,14 @@ public class Player implements KeyboardHandler, Runnable {
 
     /**
      * Plays a frame by frame animation if destroyed
+     * @see DestroyedAnimation
      */
     private void playDestroyedAnimationIfDestroyed() {
             System.out.println();
         if (isDestroyed()) {
+
             int delay = 150;
+
             destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png", delay);
 
             destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.2.png", delay);

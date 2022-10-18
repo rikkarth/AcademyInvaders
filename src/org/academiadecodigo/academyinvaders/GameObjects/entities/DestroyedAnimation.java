@@ -23,13 +23,7 @@ public class DestroyedAnimation {
 
         player.getPlayerPosition().getObject().draw();
 
-        try {
-            Thread.sleep(delay);
 
-        } catch (InterruptedException e) {
-
-            throw new RuntimeException(e);
-        }
     }
 
     public void playEnemyAnimation(String path, int delay) {

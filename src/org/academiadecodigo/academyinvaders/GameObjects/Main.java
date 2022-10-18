@@ -9,7 +9,6 @@ import org.academiadecodigo.academyinvaders.GameObjects.entities.Player;
 import org.academiadecodigo.academyinvaders.GameObjects.SimpleGfx.SimpleGfxFaceMapper;
 import org.academiadecodigo.academyinvaders.GameObjects.System.Sound;
 
-
 public class Main implements Runnable {
 
     //PROPERTIES
@@ -64,21 +63,14 @@ public class Main implements Runnable {
 
         GAME_GRID.init();
 
-
-
         baljeet = new Baljeet(GAME_GRID.makeGridPosition(650, 50, 50, 50, SimpleGfxFaceMapper.BALJEET), player);
 
         player = new Player(GAME_GRID.makeGridPosition(700, 750, 50, 50, SimpleGfxFaceMapper.PLAYER), baljeet);
 
         baljeetShootController = new EnemyShootController(baljeet, player);
 
-        Sound sound = new Sound("src/org/academiadecodigo/academyinvaders/GameObjects/Assets/Sound/8bit_musiclow.wav");
+        Sound sound = new Sound("/src/org/academiadecodigo/academyinvaders/GameObjects/Assets/Sound/8bit_musiclow.wav");
         sound.setLoop(20);
-
-
-
-
-
     }
 
     //GAME LOOP
@@ -121,9 +113,6 @@ public class Main implements Runnable {
 
         //player.run();
         player.shoot();
-
-
-
     }
 
     public static void main(String[] args) {
@@ -133,9 +122,5 @@ public class Main implements Runnable {
         main.init();
 
         main.start();
-
-
-
-
     }
 }

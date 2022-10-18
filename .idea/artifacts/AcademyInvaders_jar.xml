@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/AcademyInvaders_jar</output-path>
     <root id="archive" name="AcademyInvaders.jar">
       <element id="module-output" name="AcademyInvaders" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/AcademyInvaders/lib/simplegraphics.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/AcademyInvaders/AcademyInvaders.jar" path-in-jar="/" />
+      <element id="library" level="project" name="AcademyInvaders" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/simplegraphics.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

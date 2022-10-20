@@ -69,7 +69,7 @@ public class Main implements Runnable {
 
         baljeetShootController = new EnemyShootController(baljeet, player);
 
-        Sound sound = new Sound("/src/org/academiadecodigo/academyinvaders/GameObjects/Assets/Sound/8bit_musiclow.wav");
+        Sound sound = new Sound("src/org/academiadecodigo/academyinvaders/GameObjects/Assets/Sound/8bit_musiclow.wav");
         sound.setLoop(20);
     }
 
@@ -112,7 +112,9 @@ public class Main implements Runnable {
     private void tick() {
 
         //player.run();
+        player.playDestroyedAnimationIfDestroyed();
         player.shoot();
+
     }
 
     public static void main(String[] args) {

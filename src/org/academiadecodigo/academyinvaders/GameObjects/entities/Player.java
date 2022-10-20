@@ -27,6 +27,8 @@ public class Player implements KeyboardHandler, Runnable {
     private int livesLeft;
     private boolean spaceHeld;
 
+    private boolean doAnimationCounter;
+
 
     /**
      * Player Constructor
@@ -39,9 +41,10 @@ public class Player implements KeyboardHandler, Runnable {
         this.enemy = enemy;
         this.playerPosition = playerPosition;
         this.destroyed = false;
-        this.health = 100;
+        this.health = 5;
         this.livesLeft = 3;
         this.spaceHeld = false;
+        this.doAnimationCounter = true;
         playerKeyboard.initKeyboard();
         this.destroyedAnimation = new DestroyedAnimation(this);
     }
@@ -92,9 +95,10 @@ public class Player implements KeyboardHandler, Runnable {
     public void shoot() {
 
         for (int i = 0; i < bulletList.size(); i++) {
+
             playerBullet = bulletList.get(i);
 
-            playerBullet.tick();
+            playerBullet.move();
 
             if (playerBullet.ifCollided(enemy)) {
 
@@ -121,17 +125,18 @@ public class Player implements KeyboardHandler, Runnable {
 
                 bulletList.remove(i);
             }
+
         }
     }
 
     /**
      * Plays a frame by frame animation if destroyed
+     *
      * @see DestroyedAnimation
      */
-    private void playDestroyedAnimationIfDestroyed() {
-            System.out.println();
-        if (isDestroyed()) {
+    public void playDestroyedAnimationIfDestroyed() {
 
+        if (isDestroyed() && doAnimationCounter) {
             int delay = 150;
 
             destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.1.png", delay);
@@ -148,13 +153,14 @@ public class Player implements KeyboardHandler, Runnable {
 
             destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.7.png", delay);
 
-            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png", 1000);
+            destroyedAnimation.playPlayerAnimation("org/academiadecodigo/academyinvaders/GameObjects/assets/ExplosionEffects/exp.8.png", 250);
 
             this.getPlayerPosition().getObject().delete();
 
             Picture gameOver = new Picture(300, 300, "org/academiadecodigo/academyinvaders/GameObjects/assets/TitlesAndSubtitles/game_over_title.png");
 
             gameOver.draw();
+            doAnimationCounter = false;
         }
 
     }
@@ -223,10 +229,7 @@ public class Player implements KeyboardHandler, Runnable {
     //@Override
     public void run() {
 
-        while (!isDestroyed()) {
 
-            playDestroyedAnimationIfDestroyed();
-        }
     }
 }
 

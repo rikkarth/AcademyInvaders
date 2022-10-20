@@ -10,7 +10,7 @@ public class PlayerBullet extends AbstractBullet {
         super(bulletPosition, 5);
     }
 
-    public void tick() {
+    public void move() {
 
             this.getBulletPosition().moveInDirection(GridDirection.UP, 5);
     }

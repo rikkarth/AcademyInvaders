@@ -12,7 +12,7 @@ public class EnemyBullet extends AbstractBullet {
 
 
 
-    public void tick() {
+    public void move() {
 
         this.getBulletPosition().moveInDirection(GridDirection.DOWN, 5);
     }

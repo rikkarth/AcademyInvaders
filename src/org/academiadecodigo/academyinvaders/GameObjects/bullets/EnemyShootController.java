@@ -60,7 +60,7 @@ public class EnemyShootController implements Runnable {
 
             enemyBullet = bulletList.get(i);
 
-            enemyBullet.tick();
+            enemyBullet.move();
 
 
             if (enemyBullet.ifCollided(player)) {
@@ -88,6 +88,7 @@ public class EnemyShootController implements Runnable {
 
                 bulletList.remove(i);
             }
+
         }
     }
 

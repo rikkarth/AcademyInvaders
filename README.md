@@ -2,10 +2,10 @@
 Academy Invaders is a game inspired on Space Invaders but focuses on boss fights rather than wiping rows of aliens
 
 ## Release
-I'm still working on core mechanics of the game and will upload a release as soon they are finished.
+I'm still working on Academy Invaders a few times during the week, I'm currently still working on core mechanics of the game and will upload a release as soon they are finished.
 
 ## Status
-Working on it a few times per week.
+<span style="color: green"> Working on it </span>
 
 ## Gameplay
 <p align="center">

@@ -6,11 +6,13 @@ I'm still working on Academy Invaders a few times during the week, working on co
 
 ## Roadmap
 
-Release JAR with current working version;
-Add start menu;
-Add more levels and different bosses;
-Add more boss movement patterns and shooting mechanics.
-Improve Art and Animation;
+<ul>
+  <li>Release JAR with current working version;</li>
+  <li>Add start menu;</li>
+  <li>Add more levels and different bosses;</li>
+  <li>Add more boss movement patterns and shooting mechanics.</li>
+  <li>Improve Art and Animation;</li>
+</ul>
 
 ## Status
 <span style="color: green"> Working on it </span>

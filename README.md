@@ -23,5 +23,6 @@ I'm still working on Academy Invaders a few times during the week, working on co
 </p>
 
 ## Tech
-- SDK Java Version 8
+- SDK Correto-1.8
+- Language Level (8 - Lambdas, type annotations, etc.)
 - [Simple Graphics Library](https://github.com/academia-de-codigo/simple-graphics)

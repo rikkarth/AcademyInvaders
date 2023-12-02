@@ -1,21 +1,20 @@
 package org.academiadecodigo.academyinvaders.bullets;
 
-import main.java.org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
-import main.java.org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.grid.GridDirection;
+import org.academiadecodigo.academyinvaders.grid.position.GridPosition;
 
 public class EnemyBullet extends AbstractBullet {
 
-    //Constructor
-    public EnemyBullet(GridPosition bulletPosition) {
-        super(bulletPosition,5);
-    }
+  //Constructor
+  public EnemyBullet(GridPosition bulletPosition) {
+    super(bulletPosition, 5);
+  }
 
 
+  public void move() {
 
-    public void move() {
-
-        this.getBulletPosition().moveInDirection(GridDirection.DOWN, 5);
-    }
+    this.getBulletPosition().moveInDirection(GridDirection.DOWN, 5);
+  }
 
 
 }

@@ -1,100 +1,104 @@
 package org.academiadecodigo.academyinvaders.simplegfx;
 
-import main.java.org.academiadecodigo.academyinvaders.GameObjects.Grid.GridDirection;
-import main.java.org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.AbstractGridPosition;
+import org.academiadecodigo.academyinvaders.grid.GridDirection;
+import org.academiadecodigo.academyinvaders.grid.position.AbstractGridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class SimpleGfxObjectPosition extends AbstractGridPosition {
 
-    private Rectangle object;
-    private Picture objectPicture;
-    private SimpleGfxGrid grid;
+  private Rectangle object;
+  private Picture objectPicture;
+  private SimpleGfxGrid grid;
 
-    /**
-     * Simple graphics object position constructor
-     * It will construct an object at given position
-     *
-     * @param grid Simple graphics grid
-     */
-    public SimpleGfxObjectPosition(int width, int height, int sizeX, int sizeY, SimpleGfxGrid grid, SimpleGfxFaceMapper face) {
+  /**
+   * Simple graphics object position constructor It will construct an object at given position
+   *
+   * @param grid Simple graphics grid
+   */
+  public SimpleGfxObjectPosition(int width, int height, int sizeX, int sizeY, SimpleGfxGrid grid,
+      SimpleGfxFaceMapper face) {
 
-        super(width, height, grid);
+    super(width, height, grid);
 
-        this.grid = grid;
+    this.grid = grid;
 
+    //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
+    switch (face) {
+      case PLAYER:
+        objectPicture = new Picture(width, height,
+            "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/player_ship.png");
+        break;
+      case BULLET:
         //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
-        switch (face) {
-            case PLAYER:
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/player_ship.png");
-                break;
-            case BULLET:
-                //object = new Rectangle(width + grid.getGridX(), height + grid.getGridY(), sizeX, sizeY);
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/binary_bullet.png");
-                break;
-            case BULLETGREEN:
-                objectPicture =  new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/greenbullet_energy_small.png");
-                break;
-            case BALJEET:
-                objectPicture = new Picture(width, height, "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/monster_octupus.png");
-                break;
-        }
-
-        show();
+        objectPicture = new Picture(width, height,
+            "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/binary_bullet.png");
+        break;
+      case BULLETGREEN:
+        objectPicture = new Picture(width, height,
+            "org/academiadecodigo/academyinvaders/GameObjects/assets/Bullets/greenbullet_energy_small.png");
+        break;
+      case BALJEET:
+        objectPicture = new Picture(width, height,
+            "org/academiadecodigo/academyinvaders/GameObjects/assets/ShipsPlayerEnemy/monster_octupus.png");
+        break;
     }
 
+    show();
+  }
 
-    public void moveInDirection(GridDirection direction, int distance) {
 
-        int initialX = getWidth();
+  public void moveInDirection(GridDirection direction, int distance) {
 
-        int initialY = getHeight();
+    int initialX = getWidth();
 
-        super.moveInDirection(direction, distance);
+    int initialY = getHeight();
 
-        int movementX = getWidth() - initialX;
+    super.moveInDirection(direction, distance);
 
-        int movementY = getHeight() - initialY;
+    int movementX = getWidth() - initialX;
 
-        //object.translate(movementX, movementY);
-        objectPicture.translate(movementX, movementY);
+    int movementY = getHeight() - initialY;
 
-    }
+    //object.translate(movementX, movementY);
+    objectPicture.translate(movementX, movementY);
 
-    public Picture getObject() {
-        return objectPicture;
-    }
+  }
 
-    public void setObject(Picture object) {
-        this.objectPicture = object;
-    }
+  public Picture getObject() {
+    return objectPicture;
+  }
 
-    @Override
-    public int getObjectWidth() {
-        //return object.getWidth();
-        return objectPicture.getWidth();
-    }
+  public void setObject(Picture object) {
+    this.objectPicture = object;
+  }
 
-    @Override
-    public int getObjectHeight() {
-        //return object.getHeight();
-        return objectPicture.getHeight();
-    }
+  @Override
+  public int getObjectWidth() {
+    //return object.getWidth();
+    return objectPicture.getWidth();
+  }
 
-    @Override
-    public int setHeight() {
-        return 0;
-    }
+  @Override
+  public int getObjectHeight() {
+    //return object.getHeight();
+    return objectPicture.getHeight();
+  }
 
-    @Override
-    public void show() {
-        //object.fill();
-        objectPicture.draw();
-    }
+  @Override
+  public int setHeight() {
+    return 0;
+  }
 
-    @Override
-    public void hide() {
-        //object.delete();
-        objectPicture.delete();
-    }
+  @Override
+  public void show() {
+    //object.fill();
+    objectPicture.draw();
+  }
+
+  @Override
+  public void hide() {
+    //object.delete();
+    objectPicture.delete();
+  }
 }

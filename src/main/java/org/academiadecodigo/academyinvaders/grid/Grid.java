@@ -1,6 +1,6 @@
 package org.academiadecodigo.academyinvaders.grid;
 
-import main.java.org.academiadecodigo.academyinvaders.GameObjects.Grid.Position.GridPosition;
+import org.academiadecodigo.academyinvaders.grid.position.GridPosition;
 import org.academiadecodigo.academyinvaders.simplegfx.SimpleGfxFaceMapper;
 
 public interface Grid {

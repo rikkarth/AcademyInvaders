@@ -11,4 +11,7 @@
     <orderEntry type="library" name="AcademyInvaders" level="project" />
     <orderEntry type="library" exported="" name="simplegraphics" level="project" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="ff27d567-cc82-4792-9391-02683212f360" />
+  </component>
 </module>

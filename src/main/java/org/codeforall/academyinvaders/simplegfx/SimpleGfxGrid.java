@@ -1,0 +1,134 @@
+package org.codeforall.academyinvaders.simplegfx;
+
+import org.codeforall.academyinvaders.grid.Grid;
+import org.codeforall.academyinvaders.grid.position.GridPosition;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+public class SimpleGfxGrid implements Grid {
+
+
+  //PROPERTIES
+  //<<<<<<<<<<<<<<<<<<<<<<<<<<background>>>>>>>>>>>>>>>>>>>>>>>>>>><<<
+  private Rectangle screenfiller;
+  private Rectangle grid;
+  private Picture gridfill;
+  private final int PADDING = 10;
+  private final int GRID_WIDTH;
+  private final int GRID_HEIGHT;
+
+  //<<<<center elements>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  private Picture stargame;
+  private Picture arcadetitle;
+  //<<<<<<<<<<<<left side elements<<<<<<<<<<<<<<<<<<<<
+  private Picture scoreTitle;
+  private Picture healthPlayer;
+  private Picture healthStatusBar;
+  private Picture scoreBar;
+  private Picture keys;
+
+  //<<<<<<<<<<<right side elements<<<<<
+  private Picture enemyhealthtitle;
+  private Picture enemyhealthbar;
+  private Picture level;
+
+  //CONSTRUCTOR
+
+  /**
+   * When instanced, it will create a grid of the size width and height at provided padding
+   *
+   * @param width  size of the Game Grid
+   * @param height size of the Game Grid
+   */
+  public SimpleGfxGrid(int width, int height, SimpleGfxFaceMapper face) {
+
+    this.GRID_WIDTH = width;
+    this.GRID_HEIGHT = height;
+    //this.grid = new Rectangle(PADDING, PADDING, GRID_WIDTH, GRID_HEIGHT);
+
+    switch (face) {
+
+      case GAME:
+
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<background<<<<<<<<<<<<<<<<<<<<<<<<
+        this.screenfiller = new Rectangle(0, 0, 1434, 968);
+        this.screenfiller.setColor(Color.BLACK);
+        this.grid = new Rectangle(PADDING + 200, PADDING + 100, GRID_WIDTH,
+            GRID_HEIGHT);//GRID YELLOW RECTANGLE ONLY FILL;
+        this.grid.setColor(Color.YELLOW);
+        this.gridfill = new Picture(PADDING + 200, PADDING + 100,
+            "src/main/resources/backgrounds/blackhole.jpeg");
+
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<center elements>>>>>>>>>>>>>>>>>>>><<
+        this.arcadetitle = new Picture(474, 0,
+            "src/main/resources/titlesandsubtitles/academytitle.png");
+        //<<<<<<<<<<<<<<<<left side elements>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        this.scoreTitle = new Picture(17, 200,
+            "src/main/resources/titlesandsubtitles/score_subtitle.png");
+        this.healthPlayer = new Picture(15, 400,
+            "src/main/resources/titlesandsubtitles/live_status_title.png");
+        this.healthStatusBar = new Picture(10, 480,
+            "src/main/resources/bar/100percent_bar.png");
+        this.scoreBar = new Picture(10, 270,
+            "src/main/resources/bar/score_box.png");
+        //<<<<<<<<<<<<<right side elements<<<<<<<<<<<<<<<<<<<<<<<<<
+        this.enemyhealthtitle = new Picture(1250, 400,
+            "src/main/resources/titlesandsubtitles/enemy_heath_subtitle.png");
+        this.enemyhealthbar = new Picture(1235, 480,
+            "src/main/resources/bar/shield_error_bar.png");
+        this.level = new Picture(1240, 200,
+            "src/main/resources/titlesandsubtitles/small_level_one.png");
+        break;
+    }
+  }
+
+  /**
+   * Initializes/draws grid
+   */
+  public void init() {
+    //background
+    this.screenfiller.fill();
+    this.gridfill.draw();
+    //<<center>>
+    this.arcadetitle.draw();
+    this.level.draw();
+    this.grid.draw();
+  }
+
+  //GETTERS
+  public int getGRID_WIDTH() {
+    return this.GRID_WIDTH;
+  }
+
+  public int getGRID_HEIGHT() {
+    return this.GRID_HEIGHT;
+  }
+
+  /**
+   * @see Grid#makeGridPosition
+   */
+  @Override
+  public GridPosition makeGridPosition(int width, int height, int sizeX, int sizeY, SimpleGfxFaceMapper face) {
+
+    return new SimpleGfxObjectPosition(width, height, sizeX, sizeY, this, face);
+  }
+
+  /**
+   * Obtains the grid X position in the SimpleGFX canvas
+   *
+   * @return the x position of the grid
+   */
+  public int getGridX() {
+    return this.grid.getX();
+  }
+
+  /**
+   * Obtains the grid Y position in the SimpleGFX canvas
+   *
+   * @return the y position of the grid
+   */
+  public int getGridY() {
+    return this.grid.getY();
+  }
+}

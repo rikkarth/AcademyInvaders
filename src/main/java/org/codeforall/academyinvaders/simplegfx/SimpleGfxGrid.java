@@ -94,6 +94,8 @@ public class SimpleGfxGrid implements Grid {
     this.arcadetitle.draw();
     this.level.draw();
     this.grid.draw();
+    this.scoreTitle.draw();
+    this.healthStatusBar.draw();
   }
 
   //GETTERS

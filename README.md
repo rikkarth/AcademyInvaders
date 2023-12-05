@@ -1,6 +1,8 @@
 ** IMPORTANT NOTE **
 
-```This code was writen a long time ago when I was still learning Java. I will eventually refactor all of this to make it a better representation of my work.```
+```
+This code was writen a long time ago when I was still learning Java. I will eventually refactor all of this to make it a better representation of my work.
+```
 
 # Academy Invaders
 Academy Invaders is a game inspired on Space Invaders but focuses on boss fights rather than wiping rows of aliens
